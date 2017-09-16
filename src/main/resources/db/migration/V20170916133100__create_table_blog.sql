@@ -1,0 +1,12 @@
+CREATE TABLE
+BLOG
+(
+  id MEDIUMINT AUTO_INCREMENT,
+  user_id MEDIUMINT NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
