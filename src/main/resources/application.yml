@@ -6,3 +6,5 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
 flyway:
   enabled: false
+mybatis:
+  mapper-locations: classpath:repository/*.xml

@@ -1,0 +1,13 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<h1>Blog site title</h1>
+<ul>
+    <li th:each="blog : ${blogs}" th:text="${blog.title}"></li>
+</ul>
+</body>
+</html>
