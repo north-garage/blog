@@ -1,5 +1,5 @@
 CREATE TABLE
-USER
+honblack.USER
 (
      id MEDIUMINT AUTO_INCREMENT,
      email VARCHAR(255) NOT NULL,
