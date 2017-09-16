@@ -24,9 +24,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User not found for email: " + email);
         }
 
-        // ユーザー情報が取得できたらSpring Securityで認証できる形で戻す
         return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
+                String.valueOf(user.getId()),
                 user.getPasswordHash(),
                 Arrays.asList(new SimpleGrantedAuthority("USER"))
         );

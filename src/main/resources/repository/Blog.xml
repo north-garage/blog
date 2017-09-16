@@ -6,4 +6,18 @@
     <select id="findAll" resultType="honblack.honblackblog.model.Blog">
         SELECT * FROM BLOG
     </select>
+
+    <insert id="insert" parameterType="honblack.honblackblog.model.Blog">
+            INSERT INTO BLOG (
+                user_id,
+                title,
+                content,
+                created_at
+            ) VALUES (
+                #{userId},
+                #{title},
+                #{content},
+                #{createdAt}
+            );
+    </insert>
 </mapper>
