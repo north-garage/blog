@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class BlogController {
@@ -17,12 +18,15 @@ public class BlogController {
 
     @GetMapping
     public ModelAndView index(Principal principal) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("blogs", blogService.fetchBlogs());
+        if (principal != null) {
+            params.put("username", principal.getName());
+        }
+
         return new ModelAndView(
                 "blog/index",
-                new HashMap<String, Object>() {{
-                    put("blogs", blogService.fetchBlogs());
-                    put("username", principal.getName());
-                }}
+                params
         );
     }
 }

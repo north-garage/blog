@@ -7,6 +7,11 @@
 <body>
 <h1>Blog site title</h1>
 <p>Hello, <span th:text="${username}"></span></p>
+<div th:if="${username != null}">
+    <form th:action="@{/logout}" th:method="post">
+        <button type="submit">ログアウト</button>
+    </form>
+</div>
 <ul>
     <li th:each="blog : ${blogs}" th:text="${blog.title}"></li>
 </ul>
