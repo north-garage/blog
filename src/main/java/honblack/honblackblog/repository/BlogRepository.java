@@ -10,5 +10,9 @@ import java.util.List;
 public interface BlogRepository {
     List<Blog> findAll();
 
+    Blog findById(Long id);
+
     int insert(Blog blog);
+
+    int update(Blog blog);
 }

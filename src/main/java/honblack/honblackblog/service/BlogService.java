@@ -15,8 +15,12 @@ public class BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
-    public List<Blog> fetchBlogs(){
+    public List<Blog> fetchBlogs() {
         return blogRepository.findAll();
+    }
+
+    public Blog fetchById(Long blogId) {
+        return blogRepository.findById(blogId);
     }
 
     @Transactional
@@ -28,5 +32,18 @@ public class BlogService {
         blog.setCreatedAt(LocalDateTime.now());
 
         blogRepository.insert(blog);
+    }
+
+    @Transactional
+    public void update(Long id, String title, String content, Long userId) {
+        Blog blog = blogRepository.findById(id);
+        if (!blog.getUserId().equals(userId)) {
+            throw new IllegalStateException();
+        }
+        blog.setTitle(title);
+        blog.setContent(content);
+        blog.setUpdatedAt(LocalDateTime.now());
+
+        blogRepository.update(blog);
     }
 }

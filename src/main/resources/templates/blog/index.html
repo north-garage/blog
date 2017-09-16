@@ -12,8 +12,13 @@
         <button type="submit">ログアウト</button>
     </form>
 </div>
-<ul>
-    <li th:each="blog : ${blogs}" th:text="${blog.title}"></li>
-</ul>
+<section>
+    <article th:each="blog : ${blogs}">
+        <h2 th:text="${blog.title}">title</h2>
+        <p th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
+            <a th:href="@{/blogs/{id}/edit(id=${blog.id})}">edit</a>
+        </p>
+    </article>
+</section>
 </body>
 </html>

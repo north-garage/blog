@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<section>
+    <form th:action="@{/blogs/{id}/update(id=${blogId})}" th:method="put" th:object="${form}">
+        <p>
+            title: <input type="text" name="title" th:field="*{title}">
+        </p>
+        <p>
+            content: <textarea name="content" cols="30" rows="10" th:field="*{content}"></textarea>
+        </p>
+        <button type="submit">更新する</button>
+    </form>
+</section>
+</body>
+</html>

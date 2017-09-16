@@ -7,6 +7,10 @@
         SELECT * FROM BLOG
     </select>
 
+    <select id="findById" resultType="honblack.honblackblog.model.Blog">
+        SELECT * FROM BLOG WHERE id = #{id}
+    </select>
+
     <insert id="insert" parameterType="honblack.honblackblog.model.Blog">
             INSERT INTO BLOG (
                 user_id,
@@ -20,4 +24,14 @@
                 #{createdAt}
             );
     </insert>
+
+    <update id="update" parameterType="honblack.honblackblog.model.Blog">
+        UPDATE BLOG
+        SET
+            title = #{title},
+            content = #{content},
+            updated_at = #{updatedAt}
+        WHERE
+            id = #{id}
+    </update>
 </mapper>
