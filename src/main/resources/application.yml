@@ -4,7 +4,11 @@ spring:
     username: honblack
     password: ''
     driverClassName: com.mysql.jdbc.Driver
+  thymeleaf:
+    mode: LEGACYHTML5
 flyway:
   enabled: false
 mybatis:
   mapper-locations: classpath:repository/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
