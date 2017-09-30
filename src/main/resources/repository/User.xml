@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="honblack.honblackblog.repository.UserRepository">
     <select id="findByEmail" resultType="honblack.honblackblog.model.User">
-        SELECT * FROM USER where email = #{email}
+        SELECT * FROM users where email = #{email}
     </select>
 </mapper>

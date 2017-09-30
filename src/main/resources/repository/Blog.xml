@@ -4,15 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="honblack.honblackblog.repository.BlogRepository">
     <select id="findAll" resultType="honblack.honblackblog.model.Blog">
-        SELECT * FROM BLOG
+        SELECT * FROM blogs
     </select>
 
     <select id="findById" resultType="honblack.honblackblog.model.Blog">
-        SELECT * FROM BLOG WHERE id = #{id}
+        SELECT * FROM blogs WHERE id = #{id}
     </select>
 
     <insert id="insert" parameterType="honblack.honblackblog.model.Blog">
-            INSERT INTO BLOG (
+            INSERT INTO blogs (
                 user_id,
                 title,
                 content,
@@ -26,7 +26,7 @@
     </insert>
 
     <update id="update" parameterType="honblack.honblackblog.model.Blog">
-        UPDATE BLOG
+        UPDATE blogs
         SET
             title = #{title},
             content = #{content},
@@ -36,7 +36,7 @@
     </update>
 
     <delete id="delete">
-        DELETE FROM BLOG
+        DELETE FROM blogs
         WHERE
             id = #{blogId}
             AND user_id = #{userId}
