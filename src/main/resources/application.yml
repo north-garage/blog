@@ -7,8 +7,8 @@ spring:
     platform: postgres
   thymeleaf:
     mode: LEGACYHTML5
-flyway:
-  enabled: false
+#flyway:
+#  enabled: false
 mybatis:
   mapper-locations: classpath:repository/*.xml
   configuration:
