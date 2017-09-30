@@ -1,14 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/blog
-    username: blog
-    password: p@ssw0rd
     driverClassName: org.postgresql.Driver
     platform: postgres
   thymeleaf:
     mode: LEGACYHTML5
-#flyway:
-#  enabled: false
 mybatis:
   mapper-locations: classpath:repository/*.xml
   configuration:
