@@ -15,12 +15,18 @@
     </form>
     <a th:href="@{/blogs/input}">記事を書く</a>
 </div>
+<div th:if="${flash} != null">
+    <p th:text="${flash}">flash message</p>
+</div>
 <section>
     <article th:each="blog : ${blogs}">
         <h2 th:text="${blog.title}">title</h2>
-        <p th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
+        <div th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
             <a th:href="@{/blogs/{id}/edit(id=${blog.id})}">edit</a>
-        </p>
+            <form th:action="@{/blogs/{id}(id=${blog.id})}" th:method="delete">
+                <button>削除</button>
+            </form>
+        </div>
     </article>
 </section>
 </body>

@@ -8,6 +8,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -21,11 +22,14 @@ public class BlogController {
     private BlogService blogService;
 
     @GetMapping("/")
-    public ModelAndView index(Principal principal) {
+    public ModelAndView index(@ModelAttribute("flash") String flashMessage, Principal principal) {
         Map<String, Object> params = new HashMap<>();
         params.put("blogs", blogService.fetchBlogs());
         if (principal != null) {
             params.put("username", principal.getName());
+        }
+        if (flashMessage != null) {
+            params.put("flash", flashMessage);
         }
 
         return new ModelAndView("blog/index", params);
@@ -71,5 +75,16 @@ public class BlogController {
         params.put("blog", entity);
 
         return new ModelAndView("blog/show", params);
+    }
+
+    @DeleteMapping("blogs/{blogId}")
+    @Secured("ROLE_USER")
+    public String delete(@PathVariable Long blogId, Principal principal, RedirectAttributes redirectAttributes) {
+        Long userId = Long.valueOf(principal.getName());
+        blogService.delete(blogId, userId);
+
+        redirectAttributes.addFlashAttribute("flash", "削除しました");
+
+        return "redirect:/";
     }
 }
