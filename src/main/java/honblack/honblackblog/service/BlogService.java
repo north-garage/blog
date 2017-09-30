@@ -5,6 +5,7 @@ import honblack.honblackblog.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -45,5 +46,12 @@ public class BlogService {
         blog.setUpdatedAt(LocalDateTime.now());
 
         blogRepository.update(blog);
+    }
+
+    public Blog show(Long blogId) {
+        final Blog blog = blogRepository.findById(blogId);
+        blog.setContent(StringUtils.replace(blog.getContent(), "\n", "<br/>"));
+
+        return blog;
     }
 }

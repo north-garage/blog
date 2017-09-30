@@ -62,4 +62,14 @@ public class BlogController {
         blogService.update(blogId, form.getTitle(), form.getContent(), Long.parseLong(principal.getName()));
         return "redirect:/";
     }
+
+    @GetMapping("blogs/{blogId}")
+    public ModelAndView show(@PathVariable Long blogId){
+        Blog entity = blogService.show(blogId);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("blog", entity);
+
+        return new ModelAndView("blog/show", params);
+    }
 }
