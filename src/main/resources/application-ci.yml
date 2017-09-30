@@ -1,5 +1,4 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/root
-    username: root
-    password: circle_test
+    url: jdbc:postgresql://localhost/circle_test
+    username: circle_test
