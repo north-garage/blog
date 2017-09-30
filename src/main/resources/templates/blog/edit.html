@@ -5,16 +5,6 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<section>
-    <form th:action="@{/blogs/{id}/update(id=${blogId})}" th:method="put" th:object="${form}">
-        <p>
-            title: <input type="text" name="title" th:field="*{title}">
-        </p>
-        <p>
-            content: <textarea name="content" cols="30" rows="10" th:field="*{content}"></textarea>
-        </p>
-        <button type="submit">更新する</button>
-    </form>
-</section>
+<section th:include="blog/fragments :: form(@{/blogs/{id}/update(id=${blogId})}, 'put', '更新する')"></section>
 </body>
 </html>

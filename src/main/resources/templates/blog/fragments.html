@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      th:fragment="form(url, method, buttonLabel)">
+<form th:action="${url}" th:method="${method}" th:object="${blogForm}">
+    <ul th:if="${#fields.hasErrors('all')}">
+        <li th:each="error : ${#fields.detailedErrors()}">
+            <span th:text="${error.message}">Error message</span>
+        </li>
+    </ul>
+    <p>
+        title: <input type="text" name="title" th:field="*{title}">
+    </p>
+    <p>
+        content: <textarea name="content" id="" cols="30" rows="10" th:field="*{content}"></textarea>
+    </p>
+    <button type="submit" th:text="${buttonLabel}">投稿する</button>
+</form>
+</html>

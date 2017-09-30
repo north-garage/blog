@@ -6,6 +6,7 @@ import honblack.honblackblog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,13 +38,16 @@ public class BlogController {
 
     @GetMapping("blogs/input")
     @Secured("ROLE_USER")
-    public ModelAndView input() {
-        return new ModelAndView("blog/input");
+    public String input(BlogForm form) {
+        return "blog/input";
     }
 
     @PostMapping("blogs/create")
     @Secured("ROLE_USER")
-    public String create(@Valid @ModelAttribute BlogForm form, Principal principal) {
+    public String create(@Valid BlogForm form, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "blog/input";
+        }
         blogService.create(
                 form.getTitle(), form.getContent(), Long.parseLong(principal.getName()));
         return "redirect:/";
@@ -55,14 +59,17 @@ public class BlogController {
         Blog entity = blogService.fetchById(blogId);
         BlogForm form = new BlogForm(entity.getTitle(), entity.getContent());
         Map<String, Object> params = new HashMap<>();
-        params.put("form", form);
+        params.put("blogForm", form);
         params.put("blogId", blogId);
         return new ModelAndView("blog/edit", params);
     }
 
     @PutMapping("blogs/{blogId}/update")
     @Secured("ROLE_USER")
-    public String update(@PathVariable Long blogId, @Valid @ModelAttribute BlogForm form, Principal principal) {
+    public String update(@PathVariable Long blogId, @Valid BlogForm form, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "blog/edit";
+        }
         blogService.update(blogId, form.getTitle(), form.getContent(), Long.parseLong(principal.getName()));
         return "redirect:/";
     }
