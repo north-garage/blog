@@ -1,5 +1,7 @@
 package honblack.honblackblog.service;
 
+import honblack.honblackblog.exception.ResourceNotFoundException;
+import honblack.honblackblog.exception.UnexpectedCountException;
 import honblack.honblackblog.model.Blog;
 import honblack.honblackblog.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,12 @@ public class BlogService {
     }
 
     public Blog fetchById(Long blogId) {
-        return blogRepository.findById(blogId);
+        final Blog entity = blogRepository.findById(blogId);
+
+        if (entity == null) {
+            throw new ResourceNotFoundException();
+        }
+        return entity;
     }
 
     @Transactional
@@ -36,16 +43,21 @@ public class BlogService {
     }
 
     @Transactional
-    public void update(Long id, String title, String content, Long userId) {
-        Blog blog = blogRepository.findById(id);
-        if (!blog.getUserId().equals(userId)) {
-            throw new IllegalStateException();
-        }
-        blog.setTitle(title);
-        blog.setContent(content);
-        blog.setUpdatedAt(LocalDateTime.now());
+    public void update(Long blogId, String title, String content, Long userId) {
+        Blog entity = blogRepository.findByBlogAndUserId(blogId, userId);
 
-        blogRepository.update(blog);
+        if (entity == null) {
+            throw new ResourceNotFoundException();
+        }
+        entity.setTitle(title);
+        entity.setContent(content);
+        entity.setUpdatedAt(LocalDateTime.now());
+
+        final int count = blogRepository.update(entity);
+
+        if (count != 1) {
+            throw new UnexpectedCountException(1, count);
+        }
     }
 
     public Blog show(Long blogId) {
@@ -57,6 +69,10 @@ public class BlogService {
 
     @Transactional
     public void delete(Long blogId, Long userId) {
-        blogRepository.delete(blogId, userId);
+        final int count = blogRepository.delete(blogId, userId);
+
+        if (count != 1) {
+            throw new UnexpectedCountException(1, count);
+        }
     }
 }

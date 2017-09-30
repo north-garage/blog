@@ -13,6 +13,8 @@ public interface BlogRepository {
 
     Blog findById(Long id);
 
+    Blog findByBlogAndUserId(@Param("blogId") Long blogId, @Param("userId") Long userId);
+
     int insert(Blog blog);
 
     int update(Blog blog);

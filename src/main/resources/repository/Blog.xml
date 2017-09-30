@@ -11,6 +11,13 @@
         SELECT * FROM blogs WHERE id = #{id}
     </select>
 
+    <select id="findByBlogAndUserId" resultType="honblack.honblackblog.model.Blog">
+        SELECT * FROM blogs
+        WHERE
+            id = #{blogId}
+            AND user_id = #{userId}
+    </select>
+
     <insert id="insert" parameterType="honblack.honblackblog.model.Blog">
             INSERT INTO blogs (
                 user_id,
