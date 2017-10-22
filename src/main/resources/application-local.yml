@@ -3,3 +3,4 @@ spring:
     url: jdbc:postgresql://localhost/blog
     username: blog
     password: p@ssw0rd
+  thymeleaf.cache: false

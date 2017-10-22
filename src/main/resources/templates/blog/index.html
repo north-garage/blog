@@ -1,33 +1,31 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-</head>
-<body>
-<h1>Blog site title</h1>
-<p th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
-    Hello, <span th:text="${username}"></span>
-</p>
-<div th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
-    <form th:action="@{/logout}" th:method="post">
-        <button type="submit">ログアウト</button>
-    </form>
-    <a th:href="@{/blogs/input}">記事を書く</a>
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<div layout:fragment="content">
+    <p th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
+        Hello, <span th:text="${username}"></span>
+    </p>
+    <div th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
+        <form th:action="@{/logout}" th:method="post">
+            <button type="submit">ログアウト</button>
+        </form>
+        <a th:href="@{/blogs/input}">記事を書く</a>
+    </div>
+    <div th:if="${flash} != null">
+        <p th:text="${flash}">flash message</p>
+    </div>
+    <section>
+        <article th:each="blog : ${blogs}">
+            <h2 th:text="${blog.title}">title</h2>
+            <div th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
+                <a th:href="@{/blogs/{id}/edit(id=${blog.id})}">edit</a>
+                <form th:action="@{/blogs/{id}(id=${blog.id})}" th:method="delete">
+                    <button>削除</button>
+                </form>
+            </div>
+        </article>
+    </section>
 </div>
-<div th:if="${flash} != null">
-    <p th:text="${flash}">flash message</p>
-</div>
-<section>
-    <article th:each="blog : ${blogs}">
-        <h2 th:text="${blog.title}">title</h2>
-        <div th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
-            <a th:href="@{/blogs/{id}/edit(id=${blog.id})}">edit</a>
-            <form th:action="@{/blogs/{id}(id=${blog.id})}" th:method="delete">
-                <button>削除</button>
-            </form>
-        </div>
-    </article>
-</section>
-</body>
 </html>
