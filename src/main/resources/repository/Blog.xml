@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.north.garage.blog.repository.BlogRepository">
     <select id="findAll" resultType="io.north.garage.blog.model.Blog">
-        SELECT * FROM blogs
+        SELECT * FROM blogs ORDER BY created_at DESC;
     </select>
 
     <select id="findById" resultType="io.north.garage.blog.model.Blog">
