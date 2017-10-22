@@ -4,6 +4,15 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <div layout:fragment="content">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="" th:href="@{/}">ブログ一覧</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page" th:text="${blog.title}"></li>
+        </ol>
+    </nav>
+
     <article>
         <header class="title" th:text="${blog.title}">記事タイトル</header>
         <time class="subtitle" th:datetime="${blog.createdAt}" th:text="${blog.createdAt}"></time>

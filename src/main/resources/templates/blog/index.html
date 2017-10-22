@@ -4,19 +4,24 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <div layout:fragment="content">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">ブログ一覧</li>
+        </ol>
+    </nav>
     <div th:if="${flash} != null">
         <p th:text="${flash}">flash message</p>
     </div>
 
     <section>
-       <div class="card" th:each="blog : ${blogs}">
-           <div class="card-body">
-               <h4 class="card-title">
-                   <a th:href="@{/blogs/{id}(id=${blog.id})}" th:text="${blog.title}">Card title</a>
-               </h4>
-               <h6 class="card-subtitle mb-2 text-muted">
-                   create at <span th:text="${blog.createdAt}"></span>
-               </h6>
+        <div class="card" th:each="blog : ${blogs}">
+            <div class="card-body">
+                <h4 class="card-title">
+                    <a th:href="@{/blogs/{id}(id=${blog.id})}" th:text="${blog.title}">Card title</a>
+                </h4>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    create at <span th:text="${blog.createdAt}"></span>
+                </h6>
 
                 <div th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
                     <a class="card-link" th:href="@{/blogs/{id}/edit(id=${blog.id})}">編集</a>
@@ -24,8 +29,8 @@
                         <button class="btn btn-danger">削除</button>
                     </form>
                 </div>
-           </div>
-       </div>
+            </div>
+        </div>
     </section>
 </div>
 </html>
