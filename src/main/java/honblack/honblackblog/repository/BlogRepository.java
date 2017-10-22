@@ -1,11 +1,10 @@
 package honblack.honblackblog.repository;
 
+import java.util.List;
+
 import honblack.honblackblog.model.Blog;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 @Mapper
 public interface BlogRepository {
