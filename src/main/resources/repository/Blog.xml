@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="honblack.honblackblog.repository.BlogRepository">
+    <select id="findAll" resultType="honblack.honblackblog.model.Blog">
+        SELECT * FROM blogs
+    </select>
+
+    <select id="findById" resultType="honblack.honblackblog.model.Blog">
+        SELECT * FROM blogs WHERE id = #{id}
+    </select>
+
+    <select id="findByBlogAndUserId" resultType="honblack.honblackblog.model.Blog">
+        SELECT * FROM blogs
+        WHERE
+            id = #{blogId}
+            AND user_id = #{userId}
+    </select>
+
+    <insert id="insert" parameterType="honblack.honblackblog.model.Blog">
+            INSERT INTO blogs (
+                user_id,
+                title,
+                content,
+                created_at
+            ) VALUES (
+                #{userId},
+                #{title},
+                #{content},
+                #{createdAt}
+            );
+    </insert>
+
+    <update id="update" parameterType="honblack.honblackblog.model.Blog">
+        UPDATE blogs
+        SET
+            title = #{title},
+            content = #{content},
+            updated_at = #{updatedAt}
+        WHERE
+            id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM blogs
+        WHERE
+            id = #{blogId}
+            AND user_id = #{userId}
+    </delete>
+</mapper>
