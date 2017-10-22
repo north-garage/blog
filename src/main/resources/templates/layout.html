@@ -9,7 +9,13 @@
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" th:href="@{/}">ノースさん家のガレージにっき</a>
+    <a class="navbar-brand mr-auto" th:href="@{/}">ノースさん家のガレージにっき</a>
+    <a th:href="@{/blogs/input}" class="btn btn-primary"
+       th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">記事を書く</a>
+    <form th:action="@{/logout}" th:method="post" class="form-inline"
+          th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
+        <button type="submit" class="btn btn-secondary">ログアウト</button>
+    </form>
 </nav>
 <div class="container">
     <div layout:fragment="content"></div>

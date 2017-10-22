@@ -4,16 +4,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout">
 <div layout:fragment="content">
-    <p th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
-        Hello, <span th:text="${username}"></span>
-    </p>
-    <div th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">
-        <form th:action="@{/logout}" th:method="post">
-            <button type="submit" class="btn btn-secondary">ログアウト</button>
-        </form>
-        <a th:href="@{/blogs/input}">記事を書く</a>
-    </div>
-    <!-- -->
     <div th:if="${flash} != null">
         <p th:text="${flash}">flash message</p>
     </div>
