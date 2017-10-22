@@ -9,7 +9,7 @@
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand mr-auto" th:href="@{/}">ノースさん家のガレージにっき</a>
+    <a class="navbar-brand mr-auto" th:href="@{/}">ノースさん家のガレージ日記</a>
     <a th:href="@{/blogs/input}" class="btn btn-primary"
        th:if="${session.containsKey('SPRING_SECURITY_CONTEXT')}">記事を書く</a>
     <form th:action="@{/logout}" th:method="post" class="form-inline"
