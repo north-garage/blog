@@ -16,3 +16,15 @@ form.card-form{
 .card-link + .card-form, .card-form + .card-link {
     margin-left: 1rem;
 }
+
+article > header {
+    font-size: 3rem;
+}
+
+article > time.subtitle {
+    color: #868e96;
+}
+
+article > section {
+    margin-top: 2rem;
+}
