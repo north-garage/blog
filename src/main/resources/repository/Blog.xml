@@ -2,23 +2,23 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="honblack.honblackblog.repository.BlogRepository">
-    <select id="findAll" resultType="honblack.honblackblog.model.Blog">
-        SELECT * FROM blogs
+<mapper namespace="io.north.garage.blog.repository.BlogRepository">
+    <select id="findAll" resultType="io.north.garage.blog.model.Blog">
+        SELECT * FROM blogs ORDER BY created_at DESC;
     </select>
 
-    <select id="findById" resultType="honblack.honblackblog.model.Blog">
+    <select id="findById" resultType="io.north.garage.blog.model.Blog">
         SELECT * FROM blogs WHERE id = #{id}
     </select>
 
-    <select id="findByBlogAndUserId" resultType="honblack.honblackblog.model.Blog">
+    <select id="findByBlogAndUserId" resultType="io.north.garage.blog.model.Blog">
         SELECT * FROM blogs
         WHERE
             id = #{blogId}
             AND user_id = #{userId}
     </select>
 
-    <insert id="insert" parameterType="honblack.honblackblog.model.Blog">
+    <insert id="insert" parameterType="io.north.garage.blog.model.Blog">
             INSERT INTO blogs (
                 user_id,
                 title,
@@ -32,7 +32,7 @@
             );
     </insert>
 
-    <update id="update" parameterType="honblack.honblackblog.model.Blog">
+    <update id="update" parameterType="io.north.garage.blog.model.Blog">
         UPDATE blogs
         SET
             title = #{title},
