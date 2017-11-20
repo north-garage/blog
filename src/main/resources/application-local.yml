@@ -8,7 +8,7 @@ spring:
 clouds:
   aws:
     s3:
-      endpoint-url:   ""
+      endpoint-url:   "example.com"
       region:         ""
       access-key:     ""
       secret-key:     ""
